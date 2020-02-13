@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="jquery-3.3.1.js"></script>
+</head>
+<body>
+<button id="p">确定</button>
+<script type="text/javascript">
+$(document).ready(function () {
+	$("#p").click(function () {
+		console.log("开始合并数据")
+		url="../pptcon"
+			fileValue={"id":"123"}
+		 //生成表单
+        var formhtml = $("<form></form>").attr("action", url).attr("method", "post");
+     //将数据屯放表单的value
+        formhtml.append($("<input></input>").attr("type", "hidden").attr("name", "fileName").attr("value", fileValue));
+     //提交表单,并同时移除
+        formhtml.appendTo('body').submit().remove();
+		
+	})
+	
+	
+})
+
+
+
+
+
+
+
+</script>
+</body>
+</html>
