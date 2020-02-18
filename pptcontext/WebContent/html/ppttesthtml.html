@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="jquery-3.3.1.js"></script>
+</head>
+<body>
+<div>
+<input type="file" id="file" multiple="multiple">
+<br>
+<input type="text" id="url" value="">
+<table id="filename">
+
+</table>
+</div>
+<button id="p">确定上传</button>
+<button id="p1">确定合成</button>
+<script type="text/javascript">
+$(document).ready(function () {
+	var y=[];
+	var data=new FormData();
+	$("#p").click(function () {
+		
+		
+		$.ajax({
+			url:"../url",
+			type:"post",
+				 data:data,
+	                cache: false,
+	                processData: false,
+	                contentType: false,
+	                
+	                success:function(data){
+	                	console.log(data)
+	                	console.log(y)
+	                }
+		})
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	})
+	
+	
+		$("#p1").click(function () {
+			url="../pptcon"
+				var p=[]
+	 
+		
+		
+			
+			$("#filename").find("tr").each(function(){
+				var lp={}
+					lp["data"]=$(this).children().eq(1).text()
+					lp["name"]=$(this).children().eq(2).text()
+					p.push(lp)
+			})
+				
+	
+			console.log(p)
+			var fileValue=JSON.stringify(p)
+			 //生成表单
+	        var formhtml = $("<form></form>").attr("action", url).attr("method", "post");
+	     //将数据屯放表单的value
+	        formhtml.append($("<input></input>").attr("type", "hidden").attr("name", "fileName").attr("value", fileValue));
+	     //提交表单,并同时移除
+	        formhtml.appendTo('body').submit().remove();
+})
+	
+	
+	
+	
+	$("#file").change(function (e) {
+		 
+		
+		var files=e.target.files
+		y=files.length
+		for (var i = 0; i < files.length; i++) {
+			data.append(e.target.files[i].name,document.getElementById("file").files[i])
+		
+		$("#filename").append(
+		           '<tr>'+
+		           '<td class="index"></td>'+
+		           '<td> .'+e.target.files[i].name+'</td>'+
+		           '<td style="display:none">'+e.target.files[i].name+'</td>'+
+		           '</tr>'
+		
+		)
+		console.log(e.target.files[i].name)
+		console.log(files[i].name)
+		}
+		
+		j=1
+		$(".index").each(function(){
+			$(this).text(j)
+			j++
+		})
+		
+	})
+	
+
+
+
+	
+	
+	
+})
+
+
+
+
+
+
+
+</script>
+</body>
+</html>
